@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [message, setMessage] = useState('')
+  const [projects, setProjects] = useState<any[]>([]);
 
   const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/`);
+        const response = await fetch(`${BASE_URL}/projects`);
         const data = await response.json();
-        setMessage(data.message);
+        setProjects(data);
       } catch (e) {
         console.error(e);
       }
@@ -24,7 +24,17 @@ function App() {
   return (
     <>
       <div>
-        {message}
+        {projects.map((project) => (
+          <div key={project.id}>
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+            {project.tags.map((tag: string) => (
+              <span className="bg-gray-200 px-2 py-1 rounded mr-2 text-sm">{tag}</span>
+            ))}
+            <p>Difficulty: {project.difficulty}</p>
+            <br />
+          </div>
+        ))}
       </div>
     </>
   )
