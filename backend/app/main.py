@@ -31,6 +31,7 @@ def read_root():
     response = (
         supabase.table("projects")
         .select("*")
+        .limit(10)
         .execute()
     )
 
