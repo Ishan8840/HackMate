@@ -37,7 +37,7 @@ function Landing() {
   }, [projects, buffer]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
@@ -96,11 +96,11 @@ const Card = ({ id, projects, setProjects, setRight, right, title, description, 
   const getDifficultyColor = (diff: string) => {
     const diffLower = diff.toLowerCase();
     if (diffLower.includes('easy') || diffLower.includes('beginner')) {
-      return 'from-green-400 to-emerald-500';
+      return 'from-green-700 to-emerald-700';
     } else if (diffLower.includes('medium') || diffLower.includes('intermediate')) {
-      return 'from-yellow-400 to-orange-500';
+      return 'from-yellow-700 to-orange-700';
     } else if (diffLower.includes('hard') || diffLower.includes('advanced')) {
-      return 'from-red-400 to-pink-500';
+      return 'from-red-700 to-pink-700';
     }
     return 'from-blue-400 to-purple-500';
   };
@@ -151,7 +151,7 @@ const Card = ({ id, projects, setProjects, setRight, right, title, description, 
 
   return (
     <motion.div 
-      className="w-[90vw] sm:w-[25vw] max-w-md h-[70vh] bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-3xl shadow-base p-8 flex flex-col justify-between gap-6 text-center hover:cursor-grab active:cursor-grabbing border border-gray-700 backdrop-blur-lg"
+      className="w-[90vw] sm:w-[25vw] max-w-md h-[70vh] bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 rounded-3xl shadow-base p-8 flex flex-col justify-between gap-6 text-center hover:cursor-grab active:cursor-grabbing border border-gray-300 backdrop-blur-lg"
       style={{
         gridRow: 1,
         gridColumn: 1,
@@ -255,7 +255,7 @@ const Card = ({ id, projects, setProjects, setRight, right, title, description, 
         transition={{ delay: 0.8 + index * 0.1 }}
       >
         <motion.button
-          className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full shadow-xl hover:shadow-2xl hover:cursor-pointer  flex items-center justify-center group relative overflow-hidden"
+          className="w-16 h-16 bg-gradient-to-r from-red-700 to-red-700 text-white rounded-full shadow-xl hover:shadow-2xl hover:cursor-pointer  flex items-center justify-center group relative overflow-hidden"
           onClick={swipeLeft}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
@@ -266,7 +266,7 @@ const Card = ({ id, projects, setProjects, setRight, right, title, description, 
         </motion.button>
         
         <motion.button
-          className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full shadow-xl hover:shadow-2xl hover:cursor-pointer flex items-center justify-center group relative overflow-hidden"
+          className="w-16 h-16 bg-gradient-to-r from-green-700 to-green-700 text-white rounded-full shadow-xl hover:shadow-2xl hover:cursor-pointer flex items-center justify-center group relative overflow-hidden"
           onClick={swipeRight}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
