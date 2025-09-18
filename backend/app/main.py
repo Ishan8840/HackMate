@@ -27,12 +27,7 @@ def read_root():
 
 
 @app.get("/projects")
-def read_root():
-    response = (
-        supabase.table("projects")
-        .select("*")
-        .limit(10)
-        .execute()
-    )
+def get_projects(limit: int=5):
+    response = supabase.rpc("get_random_projects", {"lim": limit}).execute()
 
     return response.data
