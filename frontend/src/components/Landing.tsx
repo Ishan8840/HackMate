@@ -6,8 +6,12 @@ const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 function Landing() {
   const [projects, setProjects] = useState<any[]>([])
-  const [right, setRight] = useState<any[]>([])
   const [buffer, setBuffer] = useState<any[]>([]);
+
+  const [right, setRight] = useState<any[]>(() => {
+    const saved = localStorage.getItem("saved");
+    return saved ? JSON.parse(saved) : [];
+  });  
 
   const fetchRandomProjects = async () => {
     try {
@@ -29,6 +33,10 @@ function Landing() {
       setBuffer([]);
     }
   }, [projects, buffer]);
+
+  useEffect(() => {
+    localStorage.setItem('saved', JSON.stringify(right))
+  }, [right])
 
   useEffect(() => {
     if (projects.length > 0 && projects.length <= 10 && buffer.length === 0) {
@@ -98,11 +106,11 @@ const Card = ({ id, projects, setProjects, setRight, right, title, description, 
     if (diffLower.includes('easy') || diffLower.includes('beginner')) {
       return 'from-green-700 to-emerald-700';
     } else if (diffLower.includes('medium') || diffLower.includes('intermediate')) {
-      return 'from-yellow-700 to-orange-700';
+      return 'from-blue-700 to-blue-900';
     } else if (diffLower.includes('hard') || diffLower.includes('advanced')) {
       return 'from-red-700 to-pink-700';
     }
-    return 'from-blue-400 to-purple-500';
+    return 'from-blue-800 to-purple-950';
   };
 
   const handleDragEnd = () => {
@@ -110,7 +118,7 @@ const Card = ({ id, projects, setProjects, setRight, right, title, description, 
     if (!project) return;
 
     if (Math.abs(x.get()) > 50) {
-      if (x.get() > 0) {
+      if (x.get() > 0 && !right.some(p => p.id === project.id)) {
         setRight([...right, project]);
       }
 
