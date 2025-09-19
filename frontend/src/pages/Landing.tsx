@@ -1,8 +1,7 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { FaTrash, FaHeart } from "react-icons/fa";
-
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+import { supabase } from "../services/supabaseClient";
 
 function Landing() {
   const [projects, setProjects] = useState<any[]>([])
@@ -12,16 +11,21 @@ function Landing() {
     const saved = localStorage.getItem("saved");
     return saved ? JSON.parse(saved) : [];
   });  
-
+  
   const fetchRandomProjects = async () => {
-    try {
-      const res = await fetch(`${BASE_URL}/projects?limit=20`);
-      const data = await res.json();
-      setBuffer(data);
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  try {
+    const { data, error } = await supabase
+      .from('projects')
+      .select('*')
+      .limit(10);
+
+    if (error) throw error;
+
+    setBuffer(data);
+  } catch (e) {
+    console.error(e);
+  }
+};
 
   useEffect(() => {
     fetchRandomProjects();

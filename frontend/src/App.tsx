@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Landing from './components/Landing'
-import Saved from './components/Saved'
+import Landing from './pages/Landing'
+import Saved from './pages/Saved'
 
 function App() {
 
