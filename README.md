@@ -21,8 +21,6 @@ Finding interesting projects at hackathons or within clubs can be noisy — Hack
 
 ## Tech stack
 
-![Tech Stack Diagram](docs/techstack.png)
-
 * Frontend: **React** + **TypeScript**
 * Styling: Tailwind CSS
 * Backend: **Supabase** 
